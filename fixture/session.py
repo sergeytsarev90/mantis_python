@@ -10,10 +10,10 @@ class SH:
         wd.get(apps.Applicaton.base_url)
         wd.find_element_by_name("username").click()
         wd.find_element_by_name("username").clear()
-        wd.find_element_by_name("username").send_keys('administrator')
+        wd.find_element_by_name("username").send_keys(username)
         wd.find_element_by_name("password").click()
         wd.find_element_by_name("password").clear()
-        wd.find_element_by_name("password").send_keys('root')
+        wd.find_element_by_name("password").send_keys(password)
         wd.find_element_by_css_selector("input[type='submit']").click()
 
     def logout(self):
@@ -22,10 +22,8 @@ class SH:
 
     def ensure_logout(self):
         wd = self.app.wd
-        if len(wd.find_elements_by_link_text("Logout")) > 0:
+        if self.is_logged_in():
             self.logout()
-        else:
-            pass
 
     def ensure_login(self, username, password):
         wd = self.app.wd
